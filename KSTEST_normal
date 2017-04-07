@@ -1,0 +1,45 @@
+%    KSTEST  two sample from different mean 0f X  WITH    
+%    uniform distribution 
+%    
+%    
+%========================================================================
+
+dd = [5 10 15 20 30 50 100 300 500 1000 3000];
+np=zeros(10,11);
+c=1;
+pm = 1:4;  %do pm times ex. pm save the result of p_value
+qm = 1:4;
+double(pm);
+double(qm);
+ra=[0 0.5 3 5 10 20 30 50 75 100]
+for m=1:1:11 ;
+    for n=1:1:10;  
+     %--------------------------------
+     %  uniform distribution U(a,b)
+     %  r = a + (b-a).*rand(N,1).
+     %--------------------------------
+     
+  
+    x = 0 + (100)*rand(dd(m),1);
+    y =ra(n) + (100)*rand(dd(m),1);
+
+
+
+    [h,p,k] = kstest2(x,y,0.05);
+    r=[h,p,k]; %each kstest result column   
+
+    np(m,n)=p;
+    pm(c)=p  ; %Save each p-value  form m(1) to pm(10)
+    hm(c)=h  ; %Save each hypathsis 0 or 1
+    c=c+1;
+    end;
+
+      d=plot(pm(1:4)); %plot the P-value trend from n1 to n10
+      pm=pm';
+      pm(1:4);
+      m=m+1;
+end
+
+%np=np';
+%    F1 = cdfplot(x);
+% hold on
